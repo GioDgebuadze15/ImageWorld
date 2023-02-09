@@ -4,29 +4,30 @@ import $axios from "@/plugins/axios";
 export const usePostStore = defineStore('post', {
     state: (): State => {
         return {
-            posts: [],
-            categories:[]
+            post: null
         }
     },
     getters:{
-      categoryItems: state => state.categories.map(x=>(x.id))
+        getCategories: state => state.post?.categories
     },
     actions: {
-        initialize() {
-            $axios.get('/api/post').then(res => {
-                this.posts = res.data
-            })
-            $axios.get('/api/categories').then(res => {
-                this.categories = res.data
-            })
-        },
-        addPost(post: Object){
-            this.posts.push(post)
+        initializePost(id: number) {
+            $axios.get(`/api/post/${id}`)
+                .then(res => {
+                    this.post = res.data
+                })
         }
     }
 })
 
 interface State {
-    posts: Array<Object>
-    categories: Array<any>
+    post: Post | null
+}
+
+interface Post {
+    id: number
+    title: string
+    imageName: string
+    content: string
+    categories: Array<string>
 }

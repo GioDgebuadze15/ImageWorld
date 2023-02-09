@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home.vue'
-import ImageView from '../views/images/ImageView.vue'
+import PostView from '../views/posts/PostView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,9 +11,9 @@ const router = createRouter({
       component: Home
     },
     {
-      path:'/images/:image',
-      name: 'image',
-      component: ImageView 
+      path:'/posts/:postId',
+      name: 'post',
+      component: PostView 
     },
     // {
     //   path: '/about',

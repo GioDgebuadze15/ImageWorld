@@ -33,9 +33,39 @@ using (var scope = app.Services.CreateScope())
     var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     if (app.Environment.IsDevelopment())
     {
-        ctx.Categories.Add(new Category {Id = "Adventure"});
-        ctx.Categories.Add(new Category {Id = "Sport"});
-        ctx.Categories.Add(new Category {Id = "Nature"});
+        ctx.Add(new Category {Id = "Adventure"});
+        ctx.Add(new Category {Id = "Sport"});
+        ctx.Add(new Category {Id = "Nature"});
+        ctx.Add(new Category {Id = "Programming"});
+        ctx.Add(new Category {Id = "Movie"});
+        ctx.Add(new Post
+        {
+            Title = "Vue",
+            ImageName = "vue.png",
+            Content = "This is a post about Vue.js",
+            PostCategories = new List<PostCategory> {new() {CategoryId = "Programming"}}
+        });
+        ctx.Add(new Post
+        {
+            Title = ".Net",
+            ImageName = "dotnet.png",
+            Content = "This is a post about .Net",
+            PostCategories = new List<PostCategory> {new() {CategoryId = "Programming"}}
+        });
+        ctx.Add(new Post
+        {
+            Title = "Java",
+            ImageName = "java.png",
+            Content = "This is a post about Java",
+            PostCategories = new List<PostCategory> {new() {CategoryId = "Programming"}}
+        });
+        ctx.Add(new Post
+        {
+            Title = "Movies",
+            ImageName = "movies.png",
+            Content = "This is a post about Movies",
+            PostCategories = new List<PostCategory> {new() {CategoryId = "Movie"}}
+        });
 
         ctx.SaveChanges();
     }

@@ -9,6 +9,7 @@ public static class PostViewModels
         post => new
         {
             post.Id,
+            post.Title,
             post.ImageName,
             post.Content,
             Categories = post.PostCategories.Select(x => x.CategoryId)

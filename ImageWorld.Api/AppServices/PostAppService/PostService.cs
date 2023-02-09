@@ -2,6 +2,7 @@
 using ImageWorld.Api.ViewModels;
 using ImageWorld.Data;
 using ImageWorld.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ImageWorld.Api.AppServices.PostAppService;
 
@@ -18,6 +19,7 @@ public class PostService : IPostService
     {
         var post = new Post
         {
+            Title = postForm.Title,
             ImageName = postForm.ImageName,
             Content = postForm.Content,
             PostCategories = postForm.Categories.Select(x => new PostCategory()

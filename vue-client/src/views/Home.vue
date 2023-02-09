@@ -1,14 +1,14 @@
 ﻿<template>
 
   <v-container>
-    <v-row v-if="postStore.posts.values()">
+    <v-row v-if="postsStore.posts">
       <v-col
-          v-for="p in postStore.posts"
-          :key="`post-${p.id}`"
+          v-for="p in postsStore.posts"
+          :key="`post-${p.imageName}`"
           sm="4"
       >
-        <v-card color="image-card-item" elevation="3">
-          <router-link :to="`/images/${p.imageName}`" >
+        <v-card color="post-card-item" elevation="3">
+          <router-link :to="`/posts/${p.id}`" >
             <v-img :src="`https://localhost:7058/api/image/${p.imageName}`" class="ma-3"></v-img>
           </router-link>
         </v-card>
@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import {usePostStore} from "@/stores/post";
+import {usePostsStore} from "@/stores/posts";
 
-const postStore = usePostStore()
+const postsStore = usePostsStore()
 </script>
 
 <style scoped>

@@ -18,7 +18,7 @@ const myCustomDarkTheme: ThemeDefinition = {
         info: '#2196F3',
         success: '#4CAF50',
         warning: '#FB8C00',
-        'image-card-item': '#272f40'
+        'post-card-item': '#272f40'
     }
 }
 

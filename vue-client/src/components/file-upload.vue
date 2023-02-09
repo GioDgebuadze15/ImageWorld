@@ -8,9 +8,10 @@
       <v-card-title class="d-flex text-h6 justify-space-between align-center">
         <div class="d-flex align-center">
           <span v-if="imageStore.step === 1">Upload Image</span>
-          <span v-if="imageStore.step === 2">Category</span>
-          <span v-if="imageStore.step === 3">Description</span>
-          <span v-if="imageStore.step === 4">Confirmation</span>
+          <span v-if="imageStore.step === 2">Title</span>
+          <span v-if="imageStore.step === 3">Category</span>
+          <span v-if="imageStore.step === 4">Description</span>
+          <span v-if="imageStore.step === 5">Confirmation</span>
           <v-avatar
               color="secondary-darken-1"
               size="24"
@@ -38,11 +39,22 @@
 
         <v-window-item :value="2">
           <v-card-text>
+            <v-text-field
+                placeholder="Enter Title Here..."
+                v-model="form.title"
+            >
+
+            </v-text-field>
+          </v-card-text>
+        </v-window-item>
+        
+        <v-window-item :value="3">
+          <v-card-text>
             <v-select
                 clearable
                 chips
                 label="Select Category Here"
-                :items="postStore.categoryItems"
+                :items="postsStore.categoryItems"
                 multiple
                 variant="underlined"
                 v-model="form.categories"
@@ -50,7 +62,7 @@
           </v-card-text>
         </v-window-item>
 
-        <v-window-item :value="3">
+        <v-window-item :value="4">
           <v-card-text>
             <v-text-field
                 placeholder="Enter Description Here..."
@@ -61,7 +73,7 @@
           </v-card-text>
         </v-window-item>
 
-        <v-window-item :value="4">
+        <v-window-item :value="5">
           <v-card-text>
             <div v-if="form.imageName">
               <v-img :src="`https://localhost:7058/api/image/${form.imageName}`"/>
@@ -80,9 +92,9 @@
         </v-window-item>
       </v-window>
 
-      <v-divider v-if="imageStore.step ===2 || imageStore.step === 3"></v-divider>
+      <v-divider v-if="imageStore.step ===2 || imageStore.step === 3 || imageStore.step === 4"></v-divider>
 
-      <v-card-actions v-if="imageStore.step === 2 || imageStore.step ===3">
+      <v-card-actions v-if="imageStore.step === 2 || imageStore.step ===3 || imageStore.step === 4">
         <v-spacer></v-spacer>
         <v-btn
             variant="text"
@@ -101,7 +113,7 @@
 
       <div class="d-flex justify-center align-center mb-2">
         <v-btn
-            v-if="imageStore.step === 4"
+            v-if="imageStore.step === 5"
             color="secondary"
             variant="text"
             @click="savePost"
@@ -117,12 +129,12 @@
 import {ref} from "vue";
 import {useImageStore} from "@/stores/image-upload";
 import '../data/category'
-import {Categories} from "@/data/category";
-import {usePostStore} from "@/stores/post";
+import {usePostsStore} from "@/stores/posts";
 
 const selectedFile = ref<File | null>(null);
 
 const form = ref({
+  title: '',
   imageName: '',
   content: '',
   categories: []
@@ -137,7 +149,7 @@ const form = ref({
 
 
 const imageStore = useImageStore()
-const postStore = usePostStore()
+const postsStore = usePostsStore()
 
 const handleFile = async (event: Event) => {
   const file: File | undefined = (event.target as HTMLInputElement).files?.[0]
@@ -179,8 +191,9 @@ const close = () => {
 
 const resetInput = () => {
   selectedFile.value = null
-  form.value.imageName = ""
-  form.value.content = ""
+  form.value.title = ''
+  form.value.imageName = ''
+  form.value.content = ''
   form.value.categories = []
 }
 

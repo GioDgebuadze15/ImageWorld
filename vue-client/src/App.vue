@@ -2,6 +2,14 @@
   <v-app>
     <v-layout>
       <v-app-bar elevation="1">
+        <v-btn
+            icon
+            @click="$router.push('/')"
+        >
+          <v-icon size="x-large">
+            mdi-camera-metering-matrix
+          </v-icon>
+        </v-btn>
         <v-spacer></v-spacer>
         <div class="text-center">
           <v-menu
@@ -34,15 +42,15 @@
 import FileUpload from "@/components/file-upload.vue";
 import {useImageStore} from "@/stores/image-upload";
 import LeftNavigation from "@/components/left-navigation.vue";
-import {usePostStore} from "@/stores/post";
+import {usePostsStore} from "@/stores/posts";
 import {onBeforeMount} from "vue";
 
 const imageStore = useImageStore()
-const postStore = usePostStore();
+const postsStore = usePostsStore();
 
 
 onBeforeMount(() => {
-  postStore.initialize()
+  postsStore.initialize()
 })
 </script>
 
