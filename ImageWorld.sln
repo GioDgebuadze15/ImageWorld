@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageWorld.Api", "ImageWorld.Api\ImageWorld.Api.csproj", "{EC14D337-310F-4069-BFE8-F62AA463D782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageWorld.Models", "ImageWorld.Models\ImageWorld.Models.csproj", "{7441E2BA-4935-436C-916C-CB87F64AE0E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageWorld.Data", "ImageWorld.Data\ImageWorld.Data.csproj", "{2B1B2A02-92C1-4DA9-8A12-46D377543B61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC14D337-310F-4069-BFE8-F62AA463D782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC14D337-310F-4069-BFE8-F62AA463D782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC14D337-310F-4069-BFE8-F62AA463D782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC14D337-310F-4069-BFE8-F62AA463D782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7441E2BA-4935-436C-916C-CB87F64AE0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7441E2BA-4935-436C-916C-CB87F64AE0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7441E2BA-4935-436C-916C-CB87F64AE0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7441E2BA-4935-436C-916C-CB87F64AE0E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1B2A02-92C1-4DA9-8A12-46D377543B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1B2A02-92C1-4DA9-8A12-46D377543B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1B2A02-92C1-4DA9-8A12-46D377543B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1B2A02-92C1-4DA9-8A12-46D377543B61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
