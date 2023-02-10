@@ -16,10 +16,11 @@
     </div>
 
     <div
-        class="d-flex flex-column align-start justify-center w-75 float-end"
+        class="d-flex flex-column align-start justify-center w-75 float-end text-subtitle-0"
         v-if="showContent"
     >
       <v-checkbox
+          class="text-subtitle-0"
           v-for="c in postsStore.categories" :key="`category-${c.id}`"
           v-model="selectedCategories"
           :label="`${c.id}`"

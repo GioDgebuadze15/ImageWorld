@@ -9,7 +9,7 @@ export const usePostStore = defineStore('post', {
         }
     },
     getters: {
-        getCategories: state => state.post?.categories
+        getCategories: state => state.post?.categories.map(x => x.id)
     },
     actions: {
         initializePost(postId: number) {
