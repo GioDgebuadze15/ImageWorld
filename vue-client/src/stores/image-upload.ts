@@ -1,6 +1,7 @@
 ﻿import {defineStore} from "pinia";
 import $axios from "@/plugins/axios";
 import {usePostStore} from "@/stores/post";
+import {usePostsStore} from "@/stores/posts";
 
 export const useImageStore = defineStore('image', {
     state: (): State => {
@@ -19,8 +20,8 @@ export const useImageStore = defineStore('image', {
         },
         async savePost(form: Object) {
             const result = await $axios.post('/api/post', form)
-            const homeStore = usePostStore()
-            homeStore.addPost(result.data)
+            const postsStore = usePostsStore()
+            postsStore.addPost(result.data)
         }
     }
 })

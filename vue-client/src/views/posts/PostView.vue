@@ -18,7 +18,7 @@
     <v-card-subtitle v-if=" postStore.post.categories">
       Categories:
       <v-chip-group v-for="c in postStore.getCategories">
-        <v-chip size="small">{{ c }}</v-chip>
+          <v-chip @click="$router.push(`/categories/${c}`)" size="small">{{ c }}</v-chip>
       </v-chip-group>
     </v-card-subtitle>
 
@@ -42,6 +42,7 @@
       </div>
     </v-expand-transition>
   </v-card>
+  <div v-else>No Content - Go to home page</div>
 </template>
 
 <script setup lang="ts">
@@ -53,9 +54,12 @@ import {useRoute} from "vue-router";
 const postStore = usePostStore()
 const route = useRoute()
 
+
 onBeforeMount(() => {
-  const postId = parseInt(route.params.postId[0])
-  postStore.initializePost(postId)
+  //Todo: any better way?
+  const postId = parseInt(route.params.postId as string)
+  if (!isNaN(postId))
+    postStore.initializePost(postId)
 })
 
 const showContent = ref(false)

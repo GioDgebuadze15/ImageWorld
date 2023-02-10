@@ -28,7 +28,8 @@
           </v-menu>
         </div>
       </v-app-bar>
-      <left-navigation/>
+      <left-navigation 
+          class="d-none d-sm-none d-md-block"/>
       <v-main>
         <!--      <slot/>-->
         <file-upload/>

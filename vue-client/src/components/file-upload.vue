@@ -47,7 +47,7 @@
             </v-text-field>
           </v-card-text>
         </v-window-item>
-        
+
         <v-window-item :value="3">
           <v-card-text>
             <v-select

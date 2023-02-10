@@ -11,8 +11,8 @@ export const usePostStore = defineStore('post', {
         getCategories: state => state.post?.categories
     },
     actions: {
-        initializePost(id: number) {
-            $axios.get(`/api/post/${id}`)
+        initializePost(postId: number) {
+            $axios.get(`/api/post/${postId}`)
                 .then(res => {
                     this.post = res.data
                 })
@@ -26,8 +26,8 @@ interface State {
 
 interface Post {
     id: number
-    title: string
+    title: string | null
     imageName: string
-    content: string
+    content: string | null
     categories: Array<string>
 }
