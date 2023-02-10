@@ -18,7 +18,7 @@
     <v-card-subtitle v-if=" postStore.post.categories">
       Categories:
       <v-chip-group v-for="c in postStore.getCategories">
-          <v-chip @click="$router.push(`/categories/${c}`)" size="small">{{ c }}</v-chip>
+          <v-chip @click="$router.push(`/category/${c}`)" size="small">{{ c }}</v-chip>
       </v-chip-group>
     </v-card-subtitle>
 

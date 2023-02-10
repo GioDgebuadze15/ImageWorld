@@ -1,7 +1,6 @@
 ﻿import {defineStore} from "pinia";
 import $axios from "@/plugins/axios";
 import type {Category, Post} from "@/data/interfaces";
-import {tr} from "vuetify/locale";
 
 export const usePostsStore = defineStore('posts', {
     state: (): State => {

@@ -28,13 +28,19 @@
           </v-menu>
         </div>
       </v-app-bar>
-     
+
       <v-main>
         <!--      <slot/>-->
         <file-upload/>
         <router-view/>
       </v-main>
     </v-layout>
+    <v-footer class="d-flex flex-column pa-0 flex-grow-0" border color="#21293b">
+      <div class="px-4 py-1 text-center w-100">
+        &copy;{{ new Date().getFullYear() }} —
+        <strong>Image World</strong>
+      </div>
+    </v-footer>
   </v-app>
 </template>
 

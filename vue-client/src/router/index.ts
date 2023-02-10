@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home.vue'
-import PostView from '../views/posts/PostView.vue'
-import CategoryView from '../views/categories/CategoryView.vue'
+import PostView from '../views/post/PostView.vue'
+import CategoryView from '../views/category/CategoryView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,12 +12,12 @@ const router = createRouter({
             component: Home
         },
         {
-            path: '/posts/:postId',
+            path: '/post/:postId',
             name: 'post',
             component: PostView
         },
         {
-            path: '/categories/:categoryId',
+            path: '/category/:categoryId',
             name: 'category',
             component: CategoryView
         },
