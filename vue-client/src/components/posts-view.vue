@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-container>
+  <v-container class="pa-5">
     <v-row v-if="props.posts">
       <v-col
           v-for="p in props.posts"

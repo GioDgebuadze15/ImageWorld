@@ -22,14 +22,18 @@ public class PostService : IPostService
             Title = postForm.Title,
             ImageName = postForm.ImageName,
             Content = postForm.Content,
-            PostCategories = postForm.Categories.Select(x => new PostCategory()
-            {
-                CategoryId = x
-            }).ToList()
+            PostCategories = _ctx.Categories
+                .Where(c => postForm.Categories.Contains(c.Id))
+                .Select(c => new PostCategory
+                {
+                    CategoryId = c.Id,
+                    Category = c
+                }).ToList()
         };
         _ctx.Add(post);
         await _ctx.SaveChangesAsync();
-        return PostViewModels.Default.Compile().Invoke(post);
+        var a = PostViewModels.Default.Compile().Invoke(post);
+        return a;
     }
 
     public IEnumerable<object> GetAllPosts()

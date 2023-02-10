@@ -1,7 +1,10 @@
 ﻿<template>
-  <posts-view :posts="!postsStore.filterStatus ? postsStore.posts : postsStore.filteredPosts"/>
-  <left-navigation
-      class="d-none d-sm-none d-md-block"/>
+  <div class="d-flex">
+    <left-navigation />
+    <posts-view :posts="!postsStore.filterStatus ? postsStore.posts : postsStore.filteredPosts"/>
+  </div>
+  <!--  <left-navigation-->
+  <!--      class="d-none d-sm-none d-md-block"/>-->
 </template>
 
 <script setup lang="ts">

@@ -49,6 +49,7 @@ import FileUpload from "@/components/file-upload.vue";
 import {useImageStore} from "@/stores/image-upload";
 import {usePostsStore} from "@/stores/posts";
 import {onBeforeMount} from "vue";
+import LeftNavigation from "@/components/left-navigation.vue";
 
 const imageStore = useImageStore()
 const postsStore = usePostsStore();
