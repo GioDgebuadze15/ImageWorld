@@ -44,8 +44,8 @@ const showContent = ref(false)
 
 const selectCategory = () => {
   if (selectedCategories.value.length < 1) {
-    postsStore.filteredPosts = []
-    postsStore.filterStatus = false
+    postsStore.filteredPostsByCategory = []
+    postsStore.filterByCategoryStatus = false
     return
   }
 

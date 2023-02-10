@@ -17,9 +17,9 @@
 
     <v-card-subtitle v-if=" postStore.post.categories">
       <v-container>
-        <v-row class="pa-1">
+        <v-row>
           <v-col
-              class="pa-0 ml-3 mt-3"
+              class="pa-0 mb-3"
               v-for="c in postStore.getCategories"
               :key="`pvc-${c.id}`"
           >

@@ -6,9 +6,9 @@ export const usePostsStore = defineStore('posts', {
     state: (): State => {
         return {
             posts: [],
-            filteredPosts: [],
+            filteredPostsByCategory: [],
             categories: [],
-            filterStatus: false
+            filterByCategoryStatus: false
         }
     },
     getters: {
@@ -27,16 +27,16 @@ export const usePostsStore = defineStore('posts', {
             this.posts.push(post)
         },
         filterByCategory(selectedCategories: Array<string>) {
-            this.filteredPosts = this.posts.filter(post => post.categories.some(category => selectedCategories.includes(category.id)))
-            this.filterStatus = true
+            this.filteredPostsByCategory = this.posts.filter(post => post.categories.some(category => selectedCategories.includes(category.id)))
+            this.filterByCategoryStatus = true
         }
     }
 })
 
 interface State {
     posts: Array<Post>
-    filteredPosts: Array<Post>
+    filteredPostsByCategory: Array<Post>
     categories: Array<Category>
-    filterStatus: boolean
+    filterByCategoryStatus: boolean
 }
 
