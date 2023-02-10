@@ -16,10 +16,21 @@
     </v-card-title>
 
     <v-card-subtitle v-if=" postStore.post.categories">
-      Categories:
-      <v-chip-group v-for="c in postStore.getCategories">
-          <v-chip @click="$router.push(`/category/${c}`)" size="small">{{ c }}</v-chip>
-      </v-chip-group>
+      <v-container>
+        <v-row class="pa-1">
+          <v-col
+              class="pa-0 ml-3 mt-3"
+              v-for="c in postStore.getCategories"
+              :key="`pvc-${c.id}`"
+          >
+
+            <v-chip @click="$router.push(`/category/${c}`)" size="small">{{ c }}</v-chip>
+          </v-col>
+        </v-row>
+      </v-container>
+      <!--      <v-chip-group v-for="c in postStore.getCategories">-->
+      <!--        <v-chip @click="$router.push(`/category/${c}`)" size="small">{{ c }}</v-chip>-->
+      <!--      </v-chip-group>-->
     </v-card-subtitle>
 
     <v-card-actions class="pa-0" v-if="postStore.post.content">
