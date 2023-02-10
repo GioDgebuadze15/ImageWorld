@@ -1,6 +1,5 @@
 ﻿import {defineStore} from "pinia";
 import $axios from "@/plugins/axios";
-import {usePostStore} from "@/stores/post";
 import {usePostsStore} from "@/stores/posts";
 
 export const useImageStore = defineStore('image', {

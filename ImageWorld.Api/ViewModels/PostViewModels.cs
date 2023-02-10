@@ -12,6 +12,10 @@ public static class PostViewModels
             post.Title,
             post.ImageName,
             post.Content,
-            Categories = post.PostCategories.Select(x => x.CategoryId)
+            Categories = post.PostCategories.Select(x => new
+            {
+                x.Category.Id,
+                x.Category.Deleted
+            })
         };
 }

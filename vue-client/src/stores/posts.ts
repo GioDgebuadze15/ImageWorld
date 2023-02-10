@@ -1,15 +1,19 @@
 ﻿import {defineStore} from "pinia";
 import $axios from "@/plugins/axios";
+import type {Category, Post} from "@/data/interfaces";
+import {tr} from "vuetify/locale";
 
 export const usePostsStore = defineStore('posts', {
     state: (): State => {
         return {
             posts: [],
-            categories:[]
+            filteredPosts: [],
+            categories: [],
+            filterStatus: false
         }
     },
-    getters:{
-      categoryItems: state => state.categories.map(x=>(x.id))
+    getters: {
+        categoryItems: state => state.categories.map(x => (x.id))
     },
     actions: {
         initialize() {
@@ -20,13 +24,20 @@ export const usePostsStore = defineStore('posts', {
                 this.categories = res.data
             })
         },
-        addPost(post: Object){
+        addPost(post: Post) {
             this.posts.push(post)
+        },
+        filterByCategory(selectedCategories: Array<string>) {
+            this.filteredPosts = this.posts.filter(post => post.categories.some(category => selectedCategories.includes(category.id)))
+            this.filterStatus = true
         }
     }
 })
 
 interface State {
-    posts: Array<object>
-    categories: Array<any>
+    posts: Array<Post>
+    filteredPosts: Array<Post>
+    categories: Array<Category>
+    filterStatus: boolean
 }
+

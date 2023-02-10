@@ -28,8 +28,7 @@
           </v-menu>
         </div>
       </v-app-bar>
-      <left-navigation 
-          class="d-none d-sm-none d-md-block"/>
+     
       <v-main>
         <!--      <slot/>-->
         <file-upload/>
@@ -42,7 +41,6 @@
 <script setup lang="ts">
 import FileUpload from "@/components/file-upload.vue";
 import {useImageStore} from "@/stores/image-upload";
-import LeftNavigation from "@/components/left-navigation.vue";
 import {usePostsStore} from "@/stores/posts";
 import {onBeforeMount} from "vue";
 

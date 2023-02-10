@@ -17,9 +17,10 @@
 </template>
 
 <script setup lang="ts">
+import type {Post} from "@/data/interfaces";
 
 interface Props {
-  posts: Array<object> | null
+  posts: Array<Post> | null
 }
 
 const props = defineProps<Props>()

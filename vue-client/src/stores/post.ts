@@ -1,5 +1,6 @@
 ﻿import {defineStore} from "pinia";
 import $axios from "@/plugins/axios";
+import type {Post} from "@/data/interfaces";
 
 export const usePostStore = defineStore('post', {
     state: (): State => {
@@ -7,7 +8,7 @@ export const usePostStore = defineStore('post', {
             post: null
         }
     },
-    getters:{
+    getters: {
         getCategories: state => state.post?.categories
     },
     actions: {
@@ -24,10 +25,3 @@ interface State {
     post: Post | null
 }
 
-interface Post {
-    id: number
-    title: string | null
-    imageName: string
-    content: string | null
-    categories: Array<string>
-}
