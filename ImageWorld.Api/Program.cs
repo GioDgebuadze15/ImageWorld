@@ -1,3 +1,4 @@
+using IdentityServer4;
 using IdentityServer4.Models;
 using ImageWorld.Api.AppServices.CategoryAppService;
 using ImageWorld.Api.AppServices.ImageAppService;
@@ -12,14 +13,14 @@ const string allCors = "All";
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Dev"));
+builder.Services.AddDbContext<IdentityDbContext>(options => options.UseInMemoryDatabase("DevIdentity"));
+
 AddIdentity();
 
 builder.Services.AddControllers();
 
 builder.Services.AddRazorPages();
-
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Dev"));
-builder.Services.AddDbContext<IdentityDbContext>(options => options.UseInMemoryDatabase("DevIdentity"));
 
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IImageService, ImageService>();
@@ -156,6 +157,12 @@ void AddIdentity()
                 RedirectUris = new[] {"http://localhost:5173"},
                 PostLogoutRedirectUris = new[] {"http://localhost:5173"},
                 AllowedCorsOrigins = new[] {"http://localhost:5173"},
+                
+                AllowedScopes = new []
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                },
 
                 RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,

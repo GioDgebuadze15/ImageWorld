@@ -27,6 +27,9 @@
             </template>
           </v-menu>
         </div>
+        <div>
+          <v-btn @click="login">Login</v-btn>
+        </div>
       </v-app-bar>
 
       <v-main>
@@ -50,16 +53,46 @@
 import FileUpload from "@/components/file-upload.vue";
 import {useImageStore} from "@/stores/image-upload";
 import {usePostsStore} from "@/stores/posts";
-import {onBeforeMount} from "vue";
-import LeftNavigation from "@/components/left-navigation.vue";
+import {onBeforeMount, onMounted} from "vue";
+import {UserManager, WebStorageStateStore} from "oidc-client"
+import {useRoute, useRouter} from "vue-router";
 
 const imageStore = useImageStore()
-const postsStore = usePostsStore();
+const postsStore = usePostsStore()
+
+const route = useRoute()
+const router = useRouter()
 
 
 onBeforeMount(() => {
   postsStore.initialize()
 })
+
+const userManager = new UserManager({
+  userStore: new WebStorageStateStore({store: window.localStorage}),
+  authority: 'https://localhost:7058',
+  client_id: 'vue-client',
+  redirect_uri: 'http://localhost:5173',
+  response_type: 'code',
+  scope: 'openid profile',
+  post_logout_redirect_uri: 'http://localhost:5173',
+  // silent_redirect_uri: 'http://localhost:5173',
+
+})
+
+onBeforeMount(() => {
+  const {code, scope, session_state} = route.query
+  if (code && scope && session_state) {
+    userManager.signinRedirectCallback()
+        .then(user => {
+          router.push('/')
+        })
+  }
+})
+
+const login = () => {
+  return userManager.signinRedirect()
+}
 </script>
 
 <style>
