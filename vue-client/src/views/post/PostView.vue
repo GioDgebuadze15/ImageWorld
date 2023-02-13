@@ -12,7 +12,7 @@
     ></v-img>
 
     <v-card-title>
-      Title: {{ postStore.post?.title }}
+      {{ postStore.post?.title }}
     </v-card-title>
 
     <v-card-subtitle v-if=" postStore.post.categories">

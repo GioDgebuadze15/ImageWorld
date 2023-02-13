@@ -11,6 +11,7 @@
     >
     </v-text-field>
   </div>
+  
   <div class="d-flex">
     <left-navigation/>
     <posts-view :posts="filteredPosts()"/>
@@ -30,6 +31,7 @@ import type {Post} from "@/data/interfaces";
 const postsStore = usePostsStore()
 
 const filter = ref("")
+const offsetTop = ref(0)
 
 const filteredPosts = (): Array<Post> => {
   const normalize = filter.value.trim().toLowerCase();
@@ -41,6 +43,10 @@ const filteredPosts = (): Array<Post> => {
       ? posts.filter(p => p.title?.toLowerCase().includes(normalize) || p.content?.toLowerCase().includes(normalize))
       : posts;
 }
+
+// const onScroll = (e: Event) => {
+//   offsetTop.value = (e.target as HTMLInputElement).scrollTop as number
+// }
 </script>
 
 <style scoped>

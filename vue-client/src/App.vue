@@ -31,8 +31,10 @@
 
       <v-main>
         <!--      <slot/>-->
-        <file-upload/>
-        <router-view/>
+        <v-container>
+          <file-upload/>
+          <router-view/>
+        </v-container>
       </v-main>
     </v-layout>
     <v-footer class="d-flex flex-column pa-0 flex-grow-0" border color="#21293b">

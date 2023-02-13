@@ -1,5 +1,6 @@
 ## Ignore Custom Folder
 web-client
+*.jwk
 
 
 ## Ignore Visual Studio temporary files, build results, and
