@@ -1,6 +1,8 @@
-﻿using ImageWorld.Api.AppServices.PostAppService;
+﻿using IdentityServer4;
+using ImageWorld.Api.AppServices.PostAppService;
 using ImageWorld.Api.Form;
 using ImageWorld.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImageWorld.Api.Controllers;
@@ -15,6 +17,10 @@ public class PostController : ControllerBase
     {
         _iPostService = iPostService;
     }
+
+    [HttpGet("test")]
+    [Authorize(Policy = IdentityServerConstants.LocalApi.PolicyName)]
+    public string TestAuth() => "test";
 
 
     [HttpGet]

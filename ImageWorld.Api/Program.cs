@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Models;
+using ImageWorld.Api;
 using ImageWorld.Api.AppServices.CategoryAppService;
 using ImageWorld.Api.AppServices.ImageAppService;
 using ImageWorld.Api.AppServices.PostAppService;
@@ -81,6 +83,11 @@ using (var scope = app.Services.CreateScope())
         var userManger = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
         var user = new IdentityUser("test");
         userManger.CreateAsync(user, "password").GetAwaiter().GetResult();
+
+        var mod = new IdentityUser("mod");
+        userManger.CreateAsync(mod, "password").GetAwaiter().GetResult();
+        userManger.AddClaimAsync(mod, new Claim(ImageWorldConstants.Claims.Role, ImageWorldConstants.Roles.Mod)).GetAwaiter()
+            .GetResult();
     }
 }
 
@@ -133,7 +140,11 @@ void AddIdentity()
         .AddEntityFrameworkStores<IdentityDbContext>()
         .AddDefaultTokenProviders();
 
-    builder.Services.ConfigureApplicationCookie(config => { config.LoginPath = "/Account/Login"; });
+    builder.Services.ConfigureApplicationCookie(config =>
+    {
+        config.LoginPath = "/Account/Login";
+        config.LogoutPath = "/api/auth/logout";
+    });
 
     var identityServerBuilder = builder.Services.AddIdentityServer();
 
@@ -141,10 +152,22 @@ void AddIdentity()
 
     if (builder.Environment.IsDevelopment())
     {
-        identityServerBuilder.AddInMemoryIdentityResources(new IdentityResource[]
+        identityServerBuilder.AddInMemoryIdentityResources(new[]
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+            new IdentityResource(ImageWorldConstants.IdentityResources.RoleScope, new []
+            {
+                ImageWorldConstants.Claims.Role
+            }),
+        });
+
+        identityServerBuilder.AddInMemoryApiScopes(new ApiScope[]
+        {
+            new(IdentityServerConstants.LocalApi.ScopeName, new[]
+            {
+                ImageWorldConstants.Claims.Role
+            }),
         });
 
         identityServerBuilder.AddInMemoryClients(new Client[]
@@ -154,14 +177,16 @@ void AddIdentity()
                 ClientId = "vue-client",
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = new[] {"http://localhost:5173"},
+                RedirectUris = new[] {"http://localhost:5173/public/static/oidc/callback.html"},
                 PostLogoutRedirectUris = new[] {"http://localhost:5173"},
                 AllowedCorsOrigins = new[] {"http://localhost:5173"},
-                
-                AllowedScopes = new []
+
+                AllowedScopes = new[]
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.LocalApi.ScopeName,
+                    ImageWorldConstants.IdentityResources.RoleScope,
                 },
 
                 RequirePkce = true,
@@ -173,4 +198,16 @@ void AddIdentity()
 
         identityServerBuilder.AddDeveloperSigningCredential();
     }
+
+    builder.Services.AddLocalApiAuthentication();
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy(ImageWorldConstants.Policies.Mod, policy =>
+        {
+            var is4Policy = options.GetPolicy(IdentityServerConstants.LocalApi.PolicyName);
+            policy.Combine(is4Policy);
+            policy.RequireClaim(ImageWorldConstants.Claims.Role, ImageWorldConstants.Roles.Mod);
+        });
+    });
 }
